@@ -1,5 +1,5 @@
 class Paddle:
-    def __init__(self, canvas, root, width=60, height=20, color="white"):
+    def __init__(self, canvas, root, width=80, height=20, color="white"):
         self.canvas = canvas
         self.root = root
         self.canvas.update_idletasks()
