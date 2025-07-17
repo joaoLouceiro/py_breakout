@@ -24,7 +24,6 @@ def create_main_window(width, height):
         for i in range(1, BLOCKS_PER_LINE + 1):
             x_pos = (block_width * i) - block_width / 2
             block_array.append(Block(canvas, x=x_pos, y=y_pos, color=color))
-
     ball = Ball(canvas, paddle, block_array)
     canvas.pack()
     return root

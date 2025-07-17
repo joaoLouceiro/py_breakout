@@ -1,5 +1,5 @@
 import math
-from tabulate import tabulate
+import random
 
 from pykout.paddle import Paddle 
 
@@ -22,16 +22,26 @@ class Ball:
             self.x + self.radius, self.y + self.radius,
             fill=self.color, outline=self.color
         )
-        self.dx = -3
-        self.dy = 2
+        self.reset_ball()
         self.move()
+
+    def reset_ball(self):
+        self.canvas.coords(
+            self.ball,
+            self.x - self.radius,
+            self.y - self.radius,
+            self.x + self.radius,
+            self.y + self.radius
+        )
+        speed = 2
+        self.dx = random.choice([-speed, speed])
+        self.dy = speed
+        # self.canvas.after(2000, self.move())
 
     def move(self):
         self.canvas.move(self.ball, self.dx, self.dy)
         ball_coords = self.canvas.coords(self.ball)
-        paddle_coords = self.canvas.coords(self.paddle.rect)
         ball_left, ball_top, ball_right, ball_bottom = ball_coords
-        # paddle_left, paddle_top, paddle_right, paddle_bottom = paddle_coords
 
         # Bounce off left/right walls
         if ball_left <= 0:
@@ -50,10 +60,7 @@ class Ball:
 
         # If ball hits bottom, reset to center
         if ball_bottom >= self.w_height:
-            self.canvas.coords(self.ball, self.x - self.radius, self.y - self.radius, self.x + self.radius, self.y + self.radius)
-            self.dx = 2
-            self.dy = 2
-
+            self.reset_ball()
 
         self.canvas.after(10, self.move)
 
