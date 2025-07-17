@@ -10,5 +10,4 @@ class Block:
 
     def hit(self):
         self.is_hit = True
-        # self.canvas.itemconfig(self, fill="black", outline="black")
         self.canvas.delete(self.rect)
